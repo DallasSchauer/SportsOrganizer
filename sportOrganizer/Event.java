@@ -9,6 +9,23 @@ public class Event {
 	protected int age;
 	protected Team[] teamList;
 	
+	void updateAllStandings () {
+		
+	}
+	
+	void addTeam (Team team) {
+		
+	}
+	
+	void removeTeam (Team team) {
+		
+	}
+	
+	Schedule generateSchedule () {
+		Schedule S = new Schedule();
+		return S;
+	}
+	
 	public String getUsername() {
 		return username;
 	}
