@@ -135,12 +135,8 @@ public class CreateAccount extends JFrame implements ActionListener {
 		//Code executes upon given action
 		if(event.getSource() == createAccountButton) {
 			//Get the Strings from the fields when the create account button is pushed
-			String email = emailField.getText();
-			String username = userField.getText();
-			String password = passField.getText();
-			
 			//Pass a new account these parameters
-			Account newAccount = new Account(username, password, email);
+			Account newAccount = new Account(userField.getText(), passField.getText(), emailField.getText());
 		
 			//Prints all accounts for testing purposes
 			/*
