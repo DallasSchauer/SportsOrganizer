@@ -33,15 +33,15 @@ protected int teamCount;
 	// Add a player to a team with a specified team and name. Players are just strings.
 	protected void addPlayerToTeam (Team team, String name) {
 		// Add player to a team's player list. The length should work as the appropriate index.
-		this.team.playerList[team.playerCount] = name;
-		this.team.playerCount++;
+		team.playerList[team.playerCount] = name;
+		team.playerCount++;
 	}
 
 	// FUNCTION: PRINT ALL TEAMS
 	// Debugging function to help print all teams a coach has created and all the players on the roster.
 	protected void printAllTeams () {
 		for (int i = 0; i < this.teamCount; i++) {
-			System.out.println ("Team" + i ": " + this.teamList[i].name);
+			System.out.println ("Team" + i + ": " + this.teamList[i].name);
 			for (int j = 0; j < this.teamList[i].playerList.length; j++) {
 				System.out.println (this.teamList[i].playerList[j]);
 			}

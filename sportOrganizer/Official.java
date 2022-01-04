@@ -15,13 +15,19 @@ public class Official extends Account {
 	
 	// CONSTRUCTOR: OFFICIAL
 	// Creates a new official with the arguments in its fields as well as initializing as an empty availability and schedule.
-	public Official (String username, String password, String email, name) {
+	public Official (String username, String password, String email, String name) {
 		super(username, password, email);
 
 		this.name = name;
 		this.availability = new long[100];
 		this.availableDaysCount = 0;
-		this.schedule = new long[100];
+		
+		//this.schedule = new long[100];
+		/*
+		 * This is giving me an error since schedule is declared as an array of type Game, but here it is being assigned 
+		 * an array of 100 long. I am not sure which one needs to be changed.
+		 */
+		
 		this.scheduleShiftsCount = 0;
 	}
 
@@ -29,7 +35,7 @@ public class Official extends Account {
 	// Submits a score for a game. 
 	protected void submitScore (Game game, int score1, int score2) {
 		if (score1 < 0 || score2 < 0) {
-			System.out.println("Not a valid score. Submit a new one.")
+			System.out.println("Not a valid score. Submit a new one.");
 		}
 		game.score[0] = score1;
 		game.score[1] = score2;
@@ -66,10 +72,8 @@ public class Official extends Account {
 	protected void removeGameFromSchedule (Game game) {
 		for (int i = 0; i < this.scheduleShiftsCount; i++) {
 			if (this.schedule[i].time == game.time) {
-				if ((stringCompare(this.schedule[i].participants[0].name, 
-				game.participants[0].name)) && 
-				stringCompare(this.schedule[i].participants[1].name, 
-				game.participants[1].name)) {
+				if (this.schedule[i].participants[0].name.equals(game.participants[0].name) && 
+				this.schedule[i].participants[1].name.equals(game.participants[1].name)) {
 					this.schedule[i] = null;
 					this.scheduleShiftsCount--;
 				}

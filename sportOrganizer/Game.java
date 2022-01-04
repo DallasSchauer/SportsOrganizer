@@ -6,5 +6,6 @@ protected int time;
 protected String location;
 protected int[] score;
 protected Official referee;
+protected boolean played;
 	
 }

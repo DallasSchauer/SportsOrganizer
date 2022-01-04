@@ -8,6 +8,7 @@ protected String email;
 
 public static Account[] accountList = new Account[100];
 public static int numAccounts = 0;
+public static String currentAccount;
 
 	
 	protected Account () {
@@ -57,5 +58,12 @@ public static int numAccounts = 0;
 	public void setEmail(String email) {
 		this.email = email;
 	}
-}
 
+	public String getCurrentAccount() {
+		return currentAccount;
+	}
+	
+	public void setCurrentAccount(String currentAccount) {
+		this.currentAccount = currentAccount;
+	}
+}
