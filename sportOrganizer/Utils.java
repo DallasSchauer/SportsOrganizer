@@ -3,6 +3,8 @@ package sportOrganizer;
 // PAGE OF UTILITY FUNCTIONS
 
 class Utils {
+
+
     // FUNCTION: MAKE DATE
     // Uses three ints and makes a date with them.
     public static long makeDate (int date, int month, int year) {
@@ -123,5 +125,22 @@ class Utils {
         
         quickSortDates(arr, low, i); // recurisvely call on the lesser side.
         quickSortDates(arr, (i+2), high); // recursively call on the greater side.
+    }
+
+    // FUNCTION: POWER OF TWO
+    // Checks if an int is a power of two. Used in tournament construction.
+    public static boolean powerOfTwo (int n) {
+        if (n == 0) {
+            return false;
+        } 
+
+        while (n != 1) {
+            if ((n % 2) != 0) {
+                return false;
+            }
+            n = n / 2;
+        }
+        return true;
+
     }
 }

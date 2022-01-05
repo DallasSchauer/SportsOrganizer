@@ -1,11 +1,6 @@
 package sportOrganizer;
 
 public class Tournament extends Event {
-    protected String name;
-    protected String sport;
-    protected int maxTeams;
-    protected int age;
-    protected Team[] participants;
     protected int type; // 0 = single elim, 1 = double elim, 2 = round robin
     protected Node head;
     protected Team champion;
@@ -17,8 +12,9 @@ public class Tournament extends Event {
         this.age = age;
         this.type = type;
 
-        this.participants = new Team[maxTeams];
-        this.head = new Node ();
+        participants = new Team[maxTeams];
+        head = new Node ();
+        champion = null;
         
     }
 
@@ -61,6 +57,11 @@ public class Tournament extends Event {
     // FUNCTION: CREATE SINGLE ELIM
     // Creates a single elimination tournament bracket.
     protected Node createSingeElim (Team[] participants, int maxTeams) {
+        if (Utils.powerOfTwo(maxTeams) == false) {
+            System.out.println("Max teams must be a power of 2.");
+            return null;
+        } // for now, maybe only powers of 2 (2, 4, 8, 16, 32);
+
         Node head = new Node ();
         
         int depth = 1;
@@ -75,6 +76,7 @@ public class Tournament extends Event {
     // FUNCITON: FILL OUT BRACKET
     // Recursive function that creates the appropriate amount of nodes depending on how many teams are in the tournament.
     protected void fillOutBracket (Team[] pool, Node head, int maxTeams, int depth) {
+
         if (depth == (maxTeams / 4)) {
             return;
         }
@@ -106,6 +108,30 @@ public class Tournament extends Event {
 
         setBracket(pool, head.left, rights);
         setBracket(pool, head.right, (rights+1));
+    }
+
+    // FUNCTION: UPDATE STANDINGS
+    // Goes through the bracket and moves teams that have won to the next round.
+    protected void updateStandings (Node root) {
+        if (root == null) {
+            return;
+        }
+        if (root.game.played) {
+            if (root.equals(this.head)) { // if the game is the championship and it's been played, assign the champion.
+                if (root.game.score[0] > root.game.score[1]) {
+                    champion = root.game.participants[0];
+                } else if (root.game.score[0] < root.game.score[1]) {
+                    champion = root.game.participants[1];
+                }
+                return;
+            }
+            proceed(root); // moves team that has won a game into the next round.
+            return;
+        }
+
+        // if the method makes it here, the game hasn't been played, so it checks the next round for played games.
+        updateStandings(root.left); 
+        updateStandings(root.right);
     }
 
     // FUNCTION: PROCEED
